@@ -1,0 +1,62 @@
+<style>
+	body, html 
+	{
+  		height: 90%;
+		background-image: url("images/bg1.jpg");
+		background-position: center;
+  		background-repeat: no-repeat;
+  		background-size: cover;
+	}
+
+	.btn
+	{
+		background:black;
+		color:white;
+		padding:10px;
+		font-size:12pt;
+	}
+
+	td
+	{
+		padding: 15px;
+	}
+
+	.menu3
+	{
+		background: black;
+		color: white;
+		padding: 10px;
+		text-decoration: none;
+	}
+</style>
+<body>
+<center>
+<center><button onclick="location.href='custhome.jsp'" class='btn'>HOME</button></center><br>
+<%@page import="java.util.*"%>
+<%
+	int pid = Integer.parseInt(request.getParameter("pid"));
+	int qty = Integer.parseInt(request.getParameter("qty"));
+
+	Vector rec = new Vector();
+	rec.add(pid);
+	rec.add(qty);
+
+	Vector prodlist = (Vector)session.getAttribute("prodlist");
+
+	if(prodlist==null)
+		prodlist = new Vector();
+
+	prodlist.add(rec);
+
+	session.setAttribute("prodlist",prodlist);
+%>
+<h3>Product added to cart successfully.</h3><br><br>
+<table width='60%'>
+<tr>
+	<td><a href='view_cart.jsp' class='menu3'>&nbsp&nbsp&nbspView Cart</a></td>
+	<td><a href='prod_list.jsp' class='menu3'>Continue Shopping</a></td>
+	
+</tr>
+</table>
+</center>
+</body>

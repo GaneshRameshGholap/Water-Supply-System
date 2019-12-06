@@ -1,0 +1,44 @@
+create table admin(
+	admin_id text primary key,
+	admin_pwd text,
+	admin_name text
+);
+
+insert into admin values('admin','admin','Pratik Jagtap');
+
+create table customer(
+	email text primary key,
+	password text,
+	name text,
+	address text,
+	phone text
+);
+
+create table product(
+	pid serial primary key,
+	pname text,
+	price float,
+	qty_in_hand int
+);
+
+insert into product(pname,price,qty_in_hand) values
+('1Ltr Bisleri Mineral Water',20,100),
+('20Lit Bisleri Minteral Water jar',150,100);
+
+create table order_master(
+	oid serial primary key,
+	odate date,
+	total float,
+	status text,
+	card_no text,
+	bank_name text,
+	emailid text references customer(email)
+);
+
+create table order_details(
+	pid int references product(pid),
+	oid int references order_master(oid),
+	qty int
+);
+
+
